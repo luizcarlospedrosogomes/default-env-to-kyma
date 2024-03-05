@@ -1,0 +1,15 @@
+{
+  "name": "default-env-to-k8s",
+  "version": "1.0.1",
+  "description": "Generate default-env.json from k8s configmap",
+  "main": "./dist/index.js",
+  "scripts": {
+    "start": "npx ts-node src/index.ts",
+    "link": "tsc --build && npm link",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "^0.20.0",
+    "base-64": "^1.0.0"
+  }
+}
