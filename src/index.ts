@@ -5,18 +5,14 @@ kc.loadFromDefault();
 
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
-const main = async () => {
-   /* try {
-        const podsRes = await k8sApi.listNamespacedPod('default');
-        k8sApi.get
-    } catch (err) {
-        console.error(err);
-    }*/
-    getSecret()
+const main = async () => {    
+    const namespace = process.argv[2];
+    const secretName = process.argv[3];
+    getSecret(namespace, secretName);
 };
 
-const getSecret = () => {
-    k8sApi.readNamespacedSecret("sprolims-authentication-binding", "spro-lims")
+const getSecret = (namespace, secretName) => {
+    k8sApi.readNamespacedSecret(secretName, namespace)
     .then((res) => {
         // Obtém os dados da Secret
         const data = res.body.data;
@@ -34,6 +30,7 @@ const getSecret = () => {
     })
     .catch((err) => {
         console.error('Error:', err);
+        console.error('Error:', err.message);
     });
 }
 main();
